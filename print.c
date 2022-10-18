@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdarg.h>
+#include <unistd.h>
 #include "main.h"
 
 /**
@@ -12,11 +14,21 @@
 int _printf(const char *format, ...)
 {
 	int n = 0;
+	va_list ls;
+	va_start(ls, format);
+
+	if (format == NULL)
+		return (EXIT_FAILURE);
 
 	while (format[n])
 	{
+		if (format[n] != '%')
+			write(1, &format[n], 1);
+		else
+			format_writter(format, &n, ls);
 		n++;
 	}
 
+	va_end(ls);
 	return (n);
 }
