@@ -11,12 +11,12 @@
  */
 int _printf(const char *format, ...)
 {
-	int count = 0;
+	int n = 0;
 
-	while (format[count])
+	while (format[n])
 	{
-		count++;
+		n++;
 	}
 
-	return (count);
+	return (n);
 }
