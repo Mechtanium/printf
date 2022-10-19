@@ -8,30 +8,49 @@
  * number_writer - converts an integer to string and writes it.
  * @ls: Variable argument list
  * @base: Convertion base integer
+ * @sign_flag: Signed or Unsigned indicator
+ * @case_: Lower case or Upper case indicator
  *
  * Description: Convert a decimal number to the required base, convert the
  * answer to a string and print the string to standard output.
  * Return: void (Nothing).
  */
-void number_writer(va_list ls, int base)
+void number_writer(va_list ls, int base, int sign_flag, int case_)
 {
-	int d = 0, v = va_arg(ls, int);
+	long int v;
 	char *snum = calloc(64, sizeof(char));
+
+	if (sign_flag == UNSIGNED_FLAG)
+	{
+		v = va_arg(ls, unsigned int);
+		if (v < 0)
+			v = -v;
+	}
+	else
+		v = va_arg(ls, int);
 
 	itoa(v, snum, base);
 
-	while (snum[d])
+	if (case_ == UPPER_CASE)
 	{
-		write(1, &snum[d], 1);
-		d++;
+		v = 0;
+
+		while (snum[v])
+		{
+			if (snum[v] >= 'a' && snum[v] <= 'z')
+				snum[v] += ('A' - 'a');
+			v++;
+		}
 	}
+
+	char_writer(snum);
 
 	free(snum);
 }
 
 /**
  * char_writer - prints strings
- * @ls: Variable argument list
+ * @str: String pointer to character list
  *
  * Description: rints characters and strings. Assume character is strlen = 1.
  * Return: void (Nothing).

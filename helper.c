@@ -7,13 +7,15 @@
  * itoa - convert number to string.
  * @n: Integer tobe converted.
  * @s: String array to return
+ * @base: Integer number base
  *
  * Description: Converts a number to a string
  * Return: character array.
  */
-void itoa(int n, char *s, int base)
+void itoa(long int n, char *s, int base)
 {
-	int i, sign = n;
+	int i;
+	long int sign = n;
 
 	if (n < 0)  /* record sign */
 		n = -n; /* make n positive */
@@ -21,8 +23,9 @@ void itoa(int n, char *s, int base)
 	i = 0;
 
 	do {       /* generate digits in reverse order */
-		s[i++] = n % base + '0';   /* get next digit */
-	} while ((n /= base) > 0);     /* delete it */
+		s[i++] = get_alpha(n % base);   /* get next digit */
+		n /= base;
+	} while (n > 0);     /* delete it */
 
 	if (sign < 0)
 		s[i++] = '-';
@@ -53,3 +56,17 @@ void revstr(char *str1)
 	}
 }
 
+/**
+ * get_alpha - convert number to character.
+ * @index: Number to be converted.
+ *
+ * Descripton: Selects a characterfrom array[15] based in index supplied.
+ * Return: Selected character.
+ */
+char get_alpha(long int index)
+{
+	char letters[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+		'a', 'b', 'c', 'd', 'e', 'f'};
+
+	return (letters[index]);
+}

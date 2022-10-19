@@ -14,8 +14,6 @@
  */
 int format_writter(const char *format, int *n, va_list ls)
 {
-	/*int d;
-	char dummy;*/
 	char *str;
 
 	switch (format[*n + 1])
@@ -34,29 +32,34 @@ int format_writter(const char *format, int *n, va_list ls)
 		case ('s'):
 			str = va_arg(ls, char *);
 			char_writer(str);
-			/*d = 0;
-			str = va_arg(ls, char *);
-			while (str[d])
-			{
-				write(1, &str[d], 1);
-				d++;
-			}*/
 			(*n)++;
 			break;
 		case ('d'):
-			number_writer(ls, 10);
+			number_writer(ls, 10, SIGNED_FLAG, LOWER_CASE);
 			(*n)++;
 			break;
 		case ('i'):
-			number_writer(ls, 10);
+			number_writer(ls, 10, SIGNED_FLAG, LOWER_CASE);
 			(*n)++;
 			break;
 		case ('b'):
-			number_writer(ls, 2);
+			number_writer(ls, 2, SIGNED_FLAG, LOWER_CASE);
 			(*n)++;
 			break;
 		case ('u'):
-			number_writer(ls, 10);
+			number_writer(ls, 10, UNSIGNED_FLAG, LOWER_CASE);
+			(*n)++;
+			break;
+		case ('o'):
+			number_writer(ls, 8, UNSIGNED_FLAG, LOWER_CASE);
+			(*n)++;
+			break;
+		case ('x'):
+			number_writer(ls, 16, UNSIGNED_FLAG, LOWER_CASE);
+			(*n)++;
+			break;
+		case ('X'):
+			number_writer(ls, 16, UNSIGNED_FLAG, UPPER_CASE);
 			(*n)++;
 			break;
 		default:
