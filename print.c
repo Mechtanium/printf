@@ -13,7 +13,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int n = 0;
+	int n = 0, c = 0;
 	va_list ls;
 	va_start(ls, format);
 
@@ -23,12 +23,15 @@ int _printf(const char *format, ...)
 	while (format[n])
 	{
 		if (format[n] != '%')
+		{
 			write(1, &format[n], 1);
+			c++;
+		}
 		else
-			format_writter(format, &n, ls);
+			c += format_writter(format, &n, ls);
 		n++;
 	}
 
 	va_end(ls);
-	return (n);
+	return (c);
 }
