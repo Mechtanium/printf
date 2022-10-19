@@ -6,4 +6,6 @@ int _printf(const char *format, ...);
 int format_writter(const char *format, int *n, va_list ls);
 void revstr(char *str1);
 void itoa(int n, char *s, int base);
+void char_writer(char *str);
+void number_writer(va_list ls, int base);
 #endif

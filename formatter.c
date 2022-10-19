@@ -14,10 +14,9 @@
  */
 int format_writter(const char *format, int *n, va_list ls)
 {
-	int d, v;
-	char dummy;
+	/*int d;
+	char dummy;*/
 	char *str;
-	char *snum;
 
 	switch (format[*n + 1])
 	{
@@ -26,45 +25,38 @@ int format_writter(const char *format, int *n, va_list ls)
 			(*n)++;
 			break;
 		case ('c'):
-			dummy = va_arg(ls, int);
-			write(1, &dummy, 1);
+			str = calloc(2, sizeof(char));
+			str[0] = va_arg(ls, int);
+			str[1] = '\0';
+			char_writer(str);
 			(*n)++;
 			break;
 		case ('s'):
-			d = 0;
+			str = va_arg(ls, char *);
+			char_writer(str);
+			/*d = 0;
 			str = va_arg(ls, char *);
 			while (str[d])
 			{
 				write(1, &str[d], 1);
 				d++;
-			}
+			}*/
 			(*n)++;
 			break;
 		case ('d'):
-			d = 0;
-			v = va_arg(ls, int);
-			snum = calloc(64, sizeof(char));
-			itoa(v, snum, 10);
-
-			while(snum[d])
-			{
-				write(1, &snum[d], 1);
-				d++;
-			}
+			number_writer(ls, 10);
 			(*n)++;
-			free(snum);
 			break;
 		case ('i'):
-			d = 0;
-			v = va_arg(ls, int);
-			snum = calloc(64, sizeof(char));
-			itoa(v, snum, 10);
-
-			while(snum[d])
-			{
-				write(1, &snum[d], 1);
-				d++;
-			}
+			number_writer(ls, 10);
+			(*n)++;
+			break;
+		case ('b'):
+			number_writer(ls, 2);
+			(*n)++;
+			break;
+		case ('u'):
+			number_writer(ls, 10);
 			(*n)++;
 			break;
 		default:
