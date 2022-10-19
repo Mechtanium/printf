@@ -9,7 +9,6 @@
  * @format: format string pointer
  * @n: Pointer to string position
  * @ls: variable argument list
- *
  * Description: Uses variable to replace formatted areas
  * Return: void (Nothing)
  */
