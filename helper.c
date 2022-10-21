@@ -8,7 +8,6 @@
  * @n: Integer tobe converted.
  * @s: String array to return
  * @base: Integer number base
- *
  * Description: Converts a number to a string
  * Return: character array.
  */
