@@ -10,7 +10,6 @@
  * @base: Convertion base integer
  * @sign_flag: Signed or Unsigned indicator
  * @case_: Lower case or Upper case indicator
- *
  * Description: Convert a decimal number to the required base, convert the
  * answer to a string and print the string to standard output.
  * Return: void (Nothing).
