@@ -10,11 +10,13 @@
  * @base: Convertion base integer
  * @sign_flag: Signed or Unsigned indicator
  * @case_: Lower case or Upper case indicator
+ * @b: String buffer of result
+ *
  * Description: Convert a decimal number to the required base, convert the
  * answer to a string and print the string to standard output.
  * Return: void (Nothing).
  */
-void number_writer(va_list ls, int base, int sign_flag, int case_)
+void number_writer(va_list ls, int base, int sign_flag, int case_, buffer *b)
 {
 	long int v;
 	char *snum = calloc(64, sizeof(char));
@@ -27,6 +29,9 @@ void number_writer(va_list ls, int base, int sign_flag, int case_)
 	}
 	else
 		v = va_arg(ls, int);
+
+	if (!v)
+		return;
 
 	itoa(v, snum, base);
 
@@ -42,7 +47,7 @@ void number_writer(va_list ls, int base, int sign_flag, int case_)
 		}
 	}
 
-	char_writer(snum);
+	char_writer(snum, b);
 
 	free(snum);
 }
@@ -54,13 +59,14 @@ void number_writer(va_list ls, int base, int sign_flag, int case_)
  * Description: rints characters and strings. Assume character is strlen = 1.
  * Return: void (Nothing).
  */
-void char_writer(char *str)
+void char_writer(char *str, buffer *b)
 {
 	int d = 0;
 
 	while (str[d])
 	{
-		write(1, (str + d), 1);
+		b->buf[b->pos] = str[d];
+		b->pos++;
 		d++;
 	}
 }

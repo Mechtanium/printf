@@ -10,16 +10,17 @@
  * @n: Pointer to string position
  * @ls: variable argument list
  * Description: Uses variable to replace formatted areas
- * Return: The print count increment integer 1.
+ * Return: void (Nothing).
  */
-int format_writter(const char *format, int *n, va_list ls)
+void format_writter(const char *format, int *n, va_list ls, buffer *b)
 {
 	char *str;
 
 	switch (format[*n + 1])
 	{
 		case ('%'):
-			write(1, "%", 1);
+			b->buf[b->pos] = '%';
+			b->pos++;
 			(*n)++;
 			break;
 		case ('c'):
@@ -27,49 +28,49 @@ int format_writter(const char *format, int *n, va_list ls)
 			str[0] = va_arg(ls, int);
 			str[1] = '\0';
 			if (!str)
-				return (0);
-			char_writer(str);
+				return;
+			char_writer(str, b);
 			free(str);
 			(*n)++;
 			break;
 		case ('s'):
 			str = va_arg(ls, char *);
 			if (!str)
-				return (0);
-			char_writer(str);
+				return;
+			char_writer(str, b);
 			(*n)++;
 			break;
 		case ('d'):
-			number_writer(ls, 10, SIGNED_FLAG, LOWER_CASE);
+			number_writer(ls, 10, SIGNED_FLAG, LOWER_CASE, b);
 			(*n)++;
 			break;
 		case ('i'):
-			number_writer(ls, 10, SIGNED_FLAG, LOWER_CASE);
+			number_writer(ls, 10, SIGNED_FLAG, LOWER_CASE, b);
 			(*n)++;
 			break;
 		case ('b'):
-			number_writer(ls, 2, SIGNED_FLAG, LOWER_CASE);
+			number_writer(ls, 2, SIGNED_FLAG, LOWER_CASE, b);
 			(*n)++;
 			break;
 		case ('u'):
-			number_writer(ls, 10, UNSIGNED_FLAG, LOWER_CASE);
+			number_writer(ls, 10, UNSIGNED_FLAG, LOWER_CASE, b);
 			(*n)++;
 			break;
 		case ('o'):
-			number_writer(ls, 8, UNSIGNED_FLAG, LOWER_CASE);
+			number_writer(ls, 8, UNSIGNED_FLAG, LOWER_CASE, b);
 			(*n)++;
 			break;
 		case ('x'):
-			number_writer(ls, 16, UNSIGNED_FLAG, LOWER_CASE);
+			number_writer(ls, 16, UNSIGNED_FLAG, LOWER_CASE, b);
 			(*n)++;
 			break;
 		case ('X'):
-			number_writer(ls, 16, UNSIGNED_FLAG, UPPER_CASE);
+			number_writer(ls, 16, UNSIGNED_FLAG, UPPER_CASE, b);
 			(*n)++;
 			break;
 		default:
-			write(1, &format[*n], 1);
+			b->buf[b->pos] = format[*n];
+			b->pos++;
 			break;
 	}
-	return (1);
 }

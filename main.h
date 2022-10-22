@@ -5,12 +5,24 @@
 #define UPPER_CASE 1
 #define LOWER_CASE 0
 
+/**
+ * buffer - Structure buffer.
+ *
+ * Description: Holds buffer pointer and size.
+ */
+typedef struct buffer
+{
+	char *buf;
+	int pos;
+} buffer;
+
+/*Prototypes*/
 int _putchar(char c); /* For testing. Don't delete */
 int _printf(const char *format, ...);
-int format_writter(const char *format, int *n, va_list ls);
+void format_writter(const char *format, int *n, va_list ls, buffer *b);
 void revstr(char *str1);
 void itoa(long int n, char *s, int base);
-void char_writer(char *str);
-void number_writer(va_list ls, int base, int sign_flag, int case_);
+void char_writer(char *str, buffer *b);
+void number_writer(va_list ls, int base, int sign_flag, int case_, buffer *b);
 char get_alpha(long int index);
 #endif
