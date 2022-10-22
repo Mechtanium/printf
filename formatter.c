@@ -26,11 +26,15 @@ int format_writter(const char *format, int *n, va_list ls)
 			str = calloc(2, sizeof(char));
 			str[0] = va_arg(ls, int);
 			str[1] = '\0';
+			if (str)
+				return (0);
 			char_writer(str);
 			(*n)++;
 			break;
 		case ('s'):
 			str = va_arg(ls, char *);
+			if (str)
+				return (0);
 			char_writer(str);
 			(*n)++;
 			break;

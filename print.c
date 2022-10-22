@@ -15,6 +15,7 @@ int _printf(const char *format, ...)
 {
 	int n = 0, c = 0;
 	va_list ls;
+
 	va_start(ls, format);
 
 	if (format == NULL)
