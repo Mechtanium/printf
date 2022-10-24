@@ -37,7 +37,7 @@ int _printf(const char *format, ...)
 		n++;
 	}
 
-	write(1, b.buf, 1025);
+	write(1, b.buf, 1024);
 	va_end(ls);
 	return (b.pos);
 }
