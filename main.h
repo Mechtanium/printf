@@ -1,4 +1,4 @@
-#ifndef MAIN_H /* You may change this (e.g. main.h becomes MAIN_H)*/
+/* You may change this (e.g. main.h becomes MAIN_H)*/
 #define MAIN_H /* You may change this (e.g. main.h becomes MAIN_H)*/
 #define SIGNED_FLAG 0
 #define UNSIGNED_FLAG 1
@@ -25,4 +25,4 @@ void itoa(long int n, char *s, int base);
 void char_writer(char *str, buffer *b);
 void number_writer(va_list ls, int base, int sign_flag, int case_, buffer *b);
 char get_alpha(long int index);
-#endif
+
