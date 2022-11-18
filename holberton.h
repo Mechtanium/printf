@@ -1,33 +1,50 @@
-#ifndef _HOLBERTON_H
-#define _HOLBERTON_H
-#include <stdarg.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
+#ifndef HOLBERTON_H
+#define HOLBERTON_H
 
-int _printf(const char *format, ...);
-int _position(const char *s, int n);
-int _strlen(char *s);
-char *_strcat(char *dest, char *src, int n);
-int _abs(int n);
-int _numlen(int n);
-void *rev_string(char *s);
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdarg.h>
+
+/* utils.c */
+int _strlen(const char *);
+int print(char *);
+char *itoa(long int, int);
+
+/* printf.c */
+int _printf(const char *, ...);
+
+/* handler.c */
+int handler(const char *, va_list);
+int percent_handler(const char *, va_list, int *);
+
+/* printers */
+int print_string(va_list);
+int print_char(va_list);
+int print_integer(va_list);
+int print_binary(va_list);
+int print_rot(va_list);
+int print_unsigned(va_list);
+int print_octal(va_list);
+int print_hexadecimal_low(va_list);
+int print_hexadecimal_upp(va_list);
+int print_pointer(va_list);
+int print_rev_string(va_list);
+
+/* _putchar.c */
+int _putchar(char);
+int buffer(char);
 
 /**
- * struct type - Struct data type
+ * struct _format - Typedef struct
  *
- * @op: data type argument
+ * @type: Format
  * @f: The function associated
- */
-
-typedef struct type
+ **/
+typedef struct _format
 {
-	char *op;
-	char *(*f)(va_list);
-} type_t;
+	char type;
+	int (*f)(va_list);
+} format;
 
-char *print_c(va_list list);
-char *print_s(va_list list);
-char *print_i(va_list list);
-char *print_bin(va_list list);
-#endif /* #ifndef _HOLBERTON_H */
+
+#endif
